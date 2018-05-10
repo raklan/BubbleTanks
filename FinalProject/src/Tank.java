@@ -18,7 +18,7 @@ public class Tank extends Sprite{
         super("src/resources/Lvl1_Vert.png");
         setBounds(x,y,w,h);
         setLayout(null);
-        tur = new JLabel("aslkdtalskdutlkasdjlaks");
+        tur = new JLabel(new ImageIcon("src/resources/TurretLvl1.png"));
         tur.setVisible(true);
         tur.setBounds(0,0,w*10,h*10);
         this.add(tur,0);

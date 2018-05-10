@@ -19,13 +19,8 @@ public class Game extends JFrame {
         en.setVisible(true);
         add(en);
 
-        JLabel label = new JLabel("alsituasjkldjtalsdkfuvajsd klasdtjl askdfuasjldkf");
-        label.setVisible(true);
-        label.setBounds(0,0,en.getWidth()*10,en.getHeight()*10);
-        en.add(label);
-
-        //world = new World();
-        //add(world);
+        world = new World();
+        add(world);
 
         setVisible(true);
     }
