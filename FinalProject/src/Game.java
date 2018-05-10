@@ -4,7 +4,7 @@ import java.awt.*;
 
 public class Game extends JFrame {
 
-    GRectangle enviro;
+    World world;
     Tank tank;
 
     public Game()
@@ -15,9 +15,7 @@ public class Game extends JFrame {
         setLayout(null);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-        enviro = new GRectangle(getWidth()*(-1), getHeight()*(-1), getWidth()*3, getHeight()*3);
-        enviro.setBackground(Color.CYAN);
-        add(enviro, 0);
+        world = new World();
 
         tank = new Tank(100, 100, 100, 100);
         tank.setVisible(true);
