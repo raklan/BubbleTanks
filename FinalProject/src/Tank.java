@@ -1,7 +1,7 @@
 public class Tank extends Sprite{
 
-    public Tank(){
-        super("src/resources/Lvl1.png");
+    public Tank(int x, int y, int width, int height){
+        super(x,y,width,height, "src/resources/Lvl1.png");
     }
 
     @Override

@@ -19,8 +19,7 @@ public class Game extends JFrame {
         enviro.setBackground(Color.CYAN);
         add(enviro, 0);
 
-        tank = new Tank();
-        tank.setBounds(100, 100, 100, 100);
+        tank = new Tank(100, 100, 100, 100);
         tank.setVisible(true);
         add(tank, 0);
         setVisible(true);
