@@ -20,7 +20,7 @@ public class Game extends JFrame {
         add(enviro, 0);
 
         tank = new Tank(100, 100, 100, 100);
-        tank.setVisible(true);
+
         add(tank, 0);
         setVisible(true);
     }
