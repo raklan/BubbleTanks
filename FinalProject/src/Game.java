@@ -1,11 +1,15 @@
 
 import javax.swing.*;
 import java.awt.*;
-
+import java.util.Timer;
+import java.util.TimerTask;
 public class Game extends JFrame {
 
     GRectangle enviro;
     Tank tank;
+
+    Timer t = new Timer();
+    int fps = 40;
 
     public Game()
     {
@@ -20,8 +24,18 @@ public class Game extends JFrame {
         add(enviro, 0);
 
         tank = new Tank(100, 100, 100, 100);
-
+        tank.setFocusable(true);
         add(tank, 0);
+
+        t.schedule(new MyTimerTask(), 0, 1000/fps);
         setVisible(true);
+    }
+
+    class MyTimerTask extends TimerTask{
+
+        @Override
+        public void run() {
+            tank.move();
+        }
     }
 }
