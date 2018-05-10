@@ -10,16 +10,23 @@ public class Game extends JFrame {
     public Game()
     {
         super("Bubble Tanks");
-        setSize(1000, 700);
+        setBounds(50,50,1000, 1000);
         setLocationRelativeTo(null);
         setLayout(null);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-        world = new World();
+        Enemy en = new Enemy(0,100,100,500,500);
+        en.setVisible(true);
+        add(en);
 
-        tank = new Tank(100, 100, 100, 100);
-        tank.setVisible(true);
-        add(tank, 0);
+        JLabel label = new JLabel("alsituasjkldjtalsdkfuvajsd klasdtjl askdfuasjldkf");
+        label.setVisible(true);
+        label.setBounds(0,0,en.getWidth()*10,en.getHeight()*10);
+        en.add(label);
+
+        //world = new World();
+        //add(world);
+
         setVisible(true);
     }
 }

@@ -1,4 +1,5 @@
 import javax.swing.*;
+import java.awt.*;
 
 public class Tank extends Sprite{
 
@@ -6,20 +7,27 @@ public class Tank extends Sprite{
 
     public Tank(){
         super("src/resources/Lvl1_Vert.png");
-        tur = new JLabel(new ImageIcon("src/resources/Lvl1_Vert.png"));
-        add(tur);
+        tur = new JLabel(new ImageIcon("src/resources/Lvl1Turret.png"));
+        add(tur,0);
         tur.setVisible(true);
         tur.setBounds(0,0,this.getWidth(), this.getHeight());
+        repaint();
     }
 
-    public Tank(int x, int y){
+    public Tank(int x, int y, int w, int h){
         super("src/resources/Lvl1_Vert.png");
-        tur = new JLabel(new ImageIcon("src/resources/Lvl1_Vert.png"));
-        add(tur);
+        setBounds(x,y,w,h);
+        setLayout(null);
+        tur = new JLabel("aslkdtalskdutlkasdjlaks");
         tur.setVisible(true);
-        tur.setBounds(0,0,this.getWidth(), this.getHeight());
-        setLocation(x,y);
+        tur.setBounds(0,0,w*10,h*10);
+        this.add(tur,0);
+        repaint();
+    }
 
+    public void setSize(int w, int h){
+        super.setSize(w, h);
+        tur.setSize(this.getWidth(), this.getHeight());
     }
 
     @Override
