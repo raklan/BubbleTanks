@@ -19,6 +19,7 @@ public class Tank extends Sprite{
         tur.setVisible(true);
         tur.setBounds(0,0,this.getWidth(), this.getHeight());
         setLocation(x,y);
+
     }
 
     @Override

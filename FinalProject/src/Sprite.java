@@ -2,15 +2,14 @@ import java.awt.*;
 
 public abstract class Sprite extends EzImage {
     protected int dx, dy, x, y;//variables for speed, for x and y
+    protected Rectangle rec;
 
     //constructor, takes in speed and filepath for the icon
     public Sprite(int deltax, int deltay, String fpath){
-        super();
-        this.changeImage(fpath);
+        this(0,0,0,0,fpath);
         dx = deltax;
         dy = deltay;
-        x=0;
-        y=0;
+        rec = new Rectangle(x,y,getWidth(),getHeight());
     }
 
     public Sprite(String path){
@@ -22,11 +21,35 @@ public abstract class Sprite extends EzImage {
         super();
     }
 
+    public Sprite(int x, int y, int width, int height, String s) {
+        super(x,y,width,height,s);
+        dx=0;
+        dy=0;
+        rec = new Rectangle(x,y,width,height);
+    }
+
     //sets the speed
     public void setSpeed(int deltax, int deltay)
     {
         dx=deltax;
         dy=deltay;
+    }
+
+    public void setLocation(int x, int y){
+        super.setLocation(x,y);
+        rec.setLocation(x,y);
+    }
+
+    @Override
+    public void setSize(int width, int height) {
+        super.setSize(width, height);
+        rec.setSize(width,height);
+    }
+
+    @Override
+    public void setBounds(int x, int y, int width, int height) {
+        super.setBounds(x, y, width, height);
+        rec = new Rectangle(x,y,width,height);
     }
 
     //sets the image, takes in filepath string

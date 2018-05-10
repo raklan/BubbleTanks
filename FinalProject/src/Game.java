@@ -17,8 +17,7 @@ public class Game extends JFrame {
 
         world = new World();
 
-        tank = new Tank();
-        tank.setBounds(100, 100, 100, 100);
+        tank = new Tank(100, 100, 100, 100);
         tank.setVisible(true);
         add(tank, 0);
         setVisible(true);
