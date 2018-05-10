@@ -3,6 +3,11 @@ import java.awt.event.KeyListener;
 
 public class Tank extends Sprite implements KeyListener {
 
+    boolean up = false;
+    boolean down = false;
+    boolean left = false;
+    boolean right = false;
+    
     public Tank(int x, int y, int width, int height){
         super(x,y,width,height, "src/resources/Lvl1_Vert.png");
         addKeyListener(this);
@@ -23,6 +28,7 @@ public class Tank extends Sprite implements KeyListener {
         switch (e.getKeyCode())
         {
             case (KeyEvent.VK_UP):
+
                 break;
         }
     }
