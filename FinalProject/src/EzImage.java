@@ -10,14 +10,14 @@ import java.io.IOException;
 
 public class EzImage extends JComponent implements MouseListener {
 //implements java.awt.image.ImageObserver, MouseListener  {
-	private Image content;
+protected Image content;
 
 // Constructor methods
 	public EzImage()  {
 		super();
 		setBounds(0, 0, 10, 10);
 		addMouseListener(this);
-	} 
+	}
 
 	public EzImage(int x, int y, int w, int h)  {
 		super();

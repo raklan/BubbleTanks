@@ -4,18 +4,6 @@ public abstract class Sprite extends EzImage {
     protected int dx, dy, x, y;//variables for speed, for x and y
     protected Rectangle rec;
 
-    //constructor, takes in speed and filepath for the icon
-    public Sprite(int deltax, int deltay, String fpath){
-        this(0,0,0,0,fpath);
-        dx = deltax;
-        dy = deltay;
-        rec = new Rectangle(x,y,getWidth(),getHeight());
-    }
-
-    public Sprite(String path){
-        this(0,0,path);
-    }
-
     //default constructor.  if used, all variables need to be added manually with setters
     public Sprite(){
         super();
@@ -23,6 +11,8 @@ public abstract class Sprite extends EzImage {
 
     public Sprite(int x, int y, int width, int height, String s) {
         super(x,y,width,height,s);
+        this.x=x;
+        this.y=y;
         dx=0;
         dy=0;
         rec = new Rectangle(x,y,width,height);

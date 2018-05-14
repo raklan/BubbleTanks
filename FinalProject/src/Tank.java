@@ -1,4 +1,5 @@
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
@@ -10,7 +11,7 @@ public class Tank extends Sprite implements KeyListener {
     boolean right = false;
 
     public Tank(int x, int y, int width, int height){
-        super(x,y,width,height, "src/resources/Lvl1_Vert.png");
+        super(x, y, width, height, "src/resources/Lvl1_Vert.png");
         addKeyListener(this);
     }
 
@@ -82,5 +83,16 @@ public class Tank extends Sprite implements KeyListener {
                 dx-=10;
                 break;
         }
+    }
+
+    public void paint(Graphics g)  {
+        Graphics2D graphics2D = (Graphics2D)g.create();
+        graphics2D.rotate(Math.toRadians(45), getWidth()/2, getHeight()/2);
+        int dim = (int)(Math.sqrt(2)*getHeight());//this is the new size of the image inside of the componentKL;ASDFJKL;
+        g.setColor(Color.red);
+        g.fillRect(0,0,getWidth(),getHeight());
+        graphics2D.drawImage(content, 0, 0, dim, dim, this);
+        paintChildren(g);
+        graphics2D.dispose();
     }
 }
