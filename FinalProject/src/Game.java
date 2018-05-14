@@ -31,7 +31,7 @@ public class Game extends JFrame {
         add(tank, 0);
 
         //Instantiates X number of enemy tanks. Change the i<=X to add more enemies
-        for(int i = 1; i<=10; i++){
+        for(int i = 1; i<=0; i++){
             enemies.add(new Enemy(i*50,i*50,100,100,this));
         }
         for(Enemy e: enemies){
