@@ -10,7 +10,7 @@ public class Tank extends Sprite implements KeyListener {
     boolean right = false;
 
     public Tank(int x, int y, int width, int height){
-        super(x,y,width,height, "src/resources/Lvl1_Vert.png");
+        super(x,y,width,height, "src/resources/Lvl1Tank.png");
         addKeyListener(this);
     }
 
