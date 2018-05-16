@@ -86,11 +86,10 @@ public class Tank extends Sprite implements KeyListener {
     }
 
     public void paint(Graphics g)  {
+        g.setClip(null);
         Graphics2D graphics2D = (Graphics2D)g.create();
         graphics2D.rotate(Math.toRadians(45), getWidth()/2, getHeight()/2);
-        g.setColor(Color.red);
-        g.fillRect(0,0,getWidth(),getHeight());
-        graphics2D.drawImage(content, 8, 8, getWidth()-16, getHeight()-16, this);
+        graphics2D.drawImage(content, 8, 8, content.getWidth(this), getHeight(), this);
         paintChildren(g);
         graphics2D.dispose();
     }
