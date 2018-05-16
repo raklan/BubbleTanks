@@ -3,7 +3,8 @@ import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
-public class Tank extends Sprite implements KeyListener {
+public class
+Tank extends Sprite implements KeyListener {
 
     boolean up = false;
     boolean down = false;
@@ -136,8 +137,6 @@ public class Tank extends Sprite implements KeyListener {
     }
 
     public void paint(Graphics g)  {
-        g.setColor(Color.red);
-        g.fillRect(0,0,getWidth(), getHeight());
         g.setClip(null);
         Graphics2D graphics2D = (Graphics2D)g.create();
         graphics2D.rotate(Math.toRadians(dir*45), getWidth()/2, getHeight()/2);
