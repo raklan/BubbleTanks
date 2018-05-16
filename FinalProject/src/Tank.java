@@ -10,9 +10,57 @@ public class Tank extends Sprite implements KeyListener {
     boolean left = false;
     boolean right = false;
 
+    int dir; //0-7, every 45 deg, clockwise starting up
+
     public Tank(int x, int y, int width, int height){
-        super(x,y,width,height, "src/resources/Lvl1Tank.png");
+        super(x,y,width,height, "src/resources/InkedLvl1Tank_LI.jpg");
         addKeyListener(this);
+    }
+
+    private void setDirection(){
+        //if both sides are pressed, they cancel each other out
+        boolean upchanged = false;
+        if(up&&down){
+            up=false;
+            down=false;
+            upchanged = true;
+        }
+        boolean rightchanged = false;
+        if(left&&right){
+            left=false;
+            right=false;
+            rightchanged=true;
+        }
+
+        //sets the direction
+        if(right){
+            if(up)
+                dir=1;
+            else if(down)
+                dir=3;
+            else
+                dir=2;
+        }else if(left){
+            if(up)
+                dir=7;
+            else if(down)
+                dir=5;
+            else
+                dir=6;
+        }else if(up)
+            dir=0;
+        else if(down)
+            dir=4;
+
+        //resets the ones that canceled out for physics purposes
+        if(upchanged){
+            up=true;
+            down=true;
+        }
+        if(rightchanged){
+            left=true;
+            right=true;
+        }
     }
 
     @Override
@@ -57,6 +105,7 @@ public class Tank extends Sprite implements KeyListener {
                 }
                 break;
         }
+        setDirection();
     }
 
     @Override
@@ -83,13 +132,16 @@ public class Tank extends Sprite implements KeyListener {
                 dx-=10;
                 break;
         }
+        setDirection();
     }
 
     public void paint(Graphics g)  {
+        g.setColor(Color.red);
+        g.fillRect(0,0,getWidth(), getHeight());
         g.setClip(null);
         Graphics2D graphics2D = (Graphics2D)g.create();
-        graphics2D.rotate(Math.toRadians(45), getWidth()/2, getHeight()/2);
-        graphics2D.drawImage(content, 8, 8, content.getWidth(this), getHeight(), this);
+        graphics2D.rotate(Math.toRadians(dir*45), getWidth()/2, getHeight()/2);
+        graphics2D.drawImage(content, 0, 0, getWidth(), getHeight(), this);
         paintChildren(g);
         graphics2D.dispose();
     }
