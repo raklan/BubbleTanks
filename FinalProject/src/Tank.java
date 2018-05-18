@@ -13,9 +13,17 @@ Tank extends Sprite implements KeyListener {
 
     int dir; //0-7, every 45 deg, clockwise starting up
 
+    Turret turret;
+
     public Tank(int x, int y, int width, int height){
-        super(x,y,width,height, "src/resources/InkedLvl1Tank_LI.jpg");
+        super(x,y,width,height, "src/resources/Lvl1Tank.png");
         addKeyListener(this);
+        turret = new Turret(this);
+        add(turret);
+    }
+
+    public Turret getTurret(){
+        return turret;
     }
 
     private void setDirection(){
@@ -78,28 +86,28 @@ Tank extends Sprite implements KeyListener {
     public void keyPressed(KeyEvent e) {
         switch (e.getKeyCode())
         {
-            case KeyEvent.VK_UP:
+            case KeyEvent.VK_W:
                 if(!up){
                     up=true;
                     dy-=10;
                 }
                 break;
 
-            case KeyEvent.VK_DOWN:
+            case KeyEvent.VK_S:
                 if(!down){
                     down=true;
                     dy+=10;
                 }
                 break;
 
-            case KeyEvent.VK_LEFT:
+            case KeyEvent.VK_A:
                 if(!left){
                     left=true;
                     dx-=10;
                 }
                 break;
 
-            case KeyEvent.VK_RIGHT:
+            case KeyEvent.VK_D:
                 if(!right){
                     right=true;
                     dx+=10;
@@ -113,22 +121,22 @@ Tank extends Sprite implements KeyListener {
     public void keyReleased(KeyEvent e) {
         switch (e.getKeyCode())
         {
-            case KeyEvent.VK_UP:
+            case KeyEvent.VK_W:
                 up=false;
                 dy+=10;
                 break;
 
-            case KeyEvent.VK_DOWN:
+            case KeyEvent.VK_S:
                 down=false;
                 dy-=10;
                 break;
 
-            case KeyEvent.VK_LEFT:
+            case KeyEvent.VK_A:
                 left=false;
                 dx+=10;
                 break;
 
-            case KeyEvent.VK_RIGHT:
+            case KeyEvent.VK_D:
                 right=false;
                 dx-=10;
                 break;
