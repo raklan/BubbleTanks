@@ -1,7 +1,7 @@
 public class Player{
 
     public int topScore;
-    public int currentScore;
+    public long currentScore;
 
     public int lives;
 
@@ -15,7 +15,7 @@ public class Player{
         return topScore;
     }
     //Returns the Player's Current Score
-    public int getScore() {
+    public long getScore() {
         return currentScore;
     }
     //Returns the Current number of lives
@@ -28,7 +28,7 @@ public class Player{
             topScore = newScore;
     }
     //Sets the Player's current score
-    public void setScore(int score) {
+    public void setScore(long score) {
         currentScore = score;
     }
     //Sets the Player's Lives
