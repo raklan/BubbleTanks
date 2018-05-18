@@ -50,4 +50,10 @@ public abstract class Sprite extends EzImage {
     //moves the sprite, called every frame from the game
     public abstract void move();
 
+    public boolean collides(Sprite collidesWith){
+        if(rec.intersects(collidesWith.rec))
+            return true;
+        else
+            return false;
+    }
 }
