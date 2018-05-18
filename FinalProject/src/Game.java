@@ -55,6 +55,7 @@ public class Game extends JFrame {
         }
 
         allCoins.add(new Coin(500,500,100,100));
+
         for(Coin c: allCoins){
             c.setVisible(true);
             add(c, 0);
@@ -98,22 +99,22 @@ public class Game extends JFrame {
                         remove(b);
                     }
                 }
-                for(Coin c: allCoins){
-                    add(c, 0);
-                    c.setVisible(true);
-                    if(tank.collides(c)){
-                        c.setVisible(false);
-
-                        allCoins.remove(c);
-                        remove(c);
-                        thePlayer.setScore(thePlayer.getScore()+10);
-                    }
-                }
                 for(Bullet b: allBullets){
                 if(b.collides(tank))
                     thePlayer.setLives(thePlayer.getLives()-1);
                 }
+            }
+            for(int i = 0; i<allCoins.size(); i++){
+                Coin c = allCoins.get(i);
+                if(tank.collides(c)){
+                    c.setVisible(false);
 
+                    allCoins.remove(c);
+                    remove(c);
+                    i--;
+                    thePlayer.setScore(thePlayer.getScore()+10);
+                    points.setText("Money: "+String.valueOf(thePlayer.getScore()));
+                }
             }
 
             repaint();
