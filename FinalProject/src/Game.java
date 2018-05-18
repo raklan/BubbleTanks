@@ -16,9 +16,13 @@ public class Game extends JFrame {
     Tank tank;
 
     ArrayList<Enemy> enemies = new ArrayList<>();
+    ArrayList<Coin> allCoins = new ArrayList<>();
+    ArrayList<Bullet> allBullets = new ArrayList<>();
 
     Timer t = new Timer();
     int fps = 40;
+
+    Player thePlayer;
 
     public Game()
     {
@@ -45,6 +49,8 @@ public class Game extends JFrame {
             add(e,0);
         }
 
+        thePlayer = new Player();
+
         t.schedule(new MyTimerTask(), 0, 1000/fps);
         setVisible(true);
     }
@@ -54,8 +60,42 @@ public class Game extends JFrame {
         @Override
         public void run() {
             tank.move();
-            for(Enemy e: enemies)
+
+            for(Enemy e: enemies){
                 e.move();
+                for(Bullet b: allBullets){
+                    if(b.collides(e)) {
+                        allCoins.add(new Coin(e.getX(), e.getY(),100,100));
+
+                        e.setVisible(false);
+                        b.setVisible(false);
+
+                        enemies.remove(e);
+                        remove(e);
+
+                        allBullets.remove(b);
+                        remove(b);
+                    }
+                }
+                for(Coin c: allCoins){
+                    add(c, 0);
+                    c.setVisible(true);
+                }
+            }
+            for(Bullet b: allBullets){
+                if(b.collides(tank))
+                    thePlayer.setLives(thePlayer.getLives()-1);
+            }
+            for(Coin c: allCoins){
+                if(c.collides(tank)){
+                    c.setVisible(false);
+
+                    allCoins.remove(c);
+                    remove(c);
+                    thePlayer.setScore(thePlayer.getScore()+10);
+                }
+            }
+
             repaint();
         }
     }
