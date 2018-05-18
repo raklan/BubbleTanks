@@ -1,9 +1,13 @@
 public class Bullet extends Sprite {
 
-    public Bullet(int x, int y, int dy, int dx){
+    int speed = 10;
+    int dx;
+    int dy;
+
+    public Bullet(int x, int y, double angle){
         super(x,y,50, 50, "src/resources/TankBullet.png");
-        this.dy = dy;
-        this.dx = dx;
+        dx = (int)(Math.cos(angle) * speed);
+        dy = (int)(Math.sin(angle) * speed);
     }
 
     @Override
