@@ -1,13 +1,7 @@
 
-import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
-import java.awt.geom.AffineTransform;
-import java.awt.image.AffineTransformOp;
-import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Random;
 import java.util.Timer;
 import java.util.TimerTask;
 public class Game extends JFrame {
@@ -38,7 +32,7 @@ public class Game extends JFrame {
         enviro.setBackground(Color.CYAN);
         add(enviro, 0);
 
-        tank = new Tank(100, 100, 100, 100);
+        tank = new Tank(100, 100, 100, 100, this);
         tank.setFocusable(true);
         add(tank, 0);
 
@@ -65,9 +59,18 @@ public class Game extends JFrame {
             c.setVisible(true);
             add(c, 0);
         }
+        addMouseMotionListener(tank.getTurret());
+        addMouseListener(tank);
+
+        thePlayer = new Player();
 
         t.schedule(new MyTimerTask(), 0, 1000/fps);
         setVisible(true);
+    }
+
+    public void addBullet(Bullet b){
+        add(b, 0);
+        allBullets.add(b);
     }
 
     class MyTimerTask extends TimerTask{
@@ -75,6 +78,9 @@ public class Game extends JFrame {
         @Override
         public void run() {
             tank.move();
+            for(Bullet b : allBullets){
+                b.move();
+            }
 
             for(Enemy e: enemies){
                 e.move();

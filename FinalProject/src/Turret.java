@@ -15,11 +15,17 @@ public class Turret extends Sprite implements MouseMotionListener {
         tank = t;
     }
 
+    public double getAngle(){
+        return angle;
+    }
+
     @Override
     public void move() {}
 
     @Override
-    public void mouseDragged(MouseEvent e) {}
+    public void mouseDragged(MouseEvent e) {
+        mouseMoved(e);
+    }
 
     @Override
     public void mouseMoved(MouseEvent e) {

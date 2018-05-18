@@ -2,6 +2,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.awt.event.MouseEvent;
 
 public class
 Tank extends Sprite implements KeyListener {
@@ -14,12 +15,14 @@ Tank extends Sprite implements KeyListener {
     int dir; //0-7, every 45 deg, clockwise starting up
 
     Turret turret;
+    Game win;
 
-    public Tank(int x, int y, int width, int height){
+    public Tank(int x, int y, int width, int height, Game j){
         super(x,y,width,height, "src/resources/Lvl1Tank.png");
         addKeyListener(this);
         turret = new Turret(this);
         add(turret);
+        win = j;
     }
 
     public Turret getTurret(){
@@ -142,6 +145,13 @@ Tank extends Sprite implements KeyListener {
                 break;
         }
         setDirection();
+    }
+
+    @Override
+    public void mouseReleased(MouseEvent e) {
+        double angle = turret.getAngle();
+        angle = angle - Math.PI/2;
+        win.addBullet(new Bullet(x+25, y+25, angle));
     }
 
     public void paint(Graphics g)  {
