@@ -13,6 +13,10 @@ public class Game extends JFrame {
     ArrayList<Coin> allCoins = new ArrayList<>();
     ArrayList<Bullet> allBullets = new ArrayList<>();
 
+    ArrayList<Sprite> toRemove = new ArrayList<>();
+
+    Coin newCoin;
+
     Timer t = new Timer();
     int fps = 40;
 
@@ -46,7 +50,7 @@ public class Game extends JFrame {
         add(points, 0);
 
         //Instantiates X number of enemy tanks. Change the i<=X to add more enemies
-        for(int i = 1; i<=0; i++){
+        for(int i = 1; i<=10; i++){
             enemies.add(new Enemy(i*50,i*50,100,100,this));
         }
         for(Enemy e: enemies){
@@ -54,12 +58,6 @@ public class Game extends JFrame {
             add(e,0);
         }
 
-        allCoins.add(new Coin(500,500,100,100));
-
-        for(Coin c: allCoins){
-            c.setVisible(true);
-            add(c, 0);
-        }
         addMouseMotionListener(tank.getTurret());
         addMouseListener(tank);
 
@@ -79,42 +77,44 @@ public class Game extends JFrame {
         @Override
         public void run() {
             tank.move();
-            for(Bullet b : allBullets){
+
+            for(Bullet b: allBullets){
                 b.move();
             }
 
             for(Enemy e: enemies){
                 e.move();
-                for(Bullet b: allBullets){
-                    if(b.collides(e)) {
-                        allCoins.add(new Coin(e.getX(), e.getY(),100,100));
+                for(Bullet b: allBullets) {
+                    if (b.collides(e)) {
+                        newCoin = new Coin(e.getX(), e.getY(), 25, 25);
+                        newCoin.setVisible(true);
+                        add(newCoin,0);
+                        allCoins.add(newCoin);
 
-                        e.setVisible(false);
-                        b.setVisible(false);
-
-                        enemies.remove(e);
-                        remove(e);
-
-                        allBullets.remove(b);
-                        remove(b);
+                        toRemove.add(e);
+                        toRemove.add(b);
                     }
+                    if(b.collides(tank))
+                        thePlayer.setLives(thePlayer.getLives() - 1);
                 }
-                for(Bullet b: allBullets){
-                if(b.collides(tank))
-                    thePlayer.setLives(thePlayer.getLives()-1);
-                }
-            }
-            for(int i = 0; i<allCoins.size(); i++){
-                Coin c = allCoins.get(i);
-                if(tank.collides(c)){
-                    c.setVisible(false);
 
-                    allCoins.remove(c);
-                    remove(c);
-                    i--;
+            }
+            for(Coin c: allCoins){
+                if(tank.collides(c)){
+                    toRemove.add(c);
                     thePlayer.setScore(thePlayer.getScore()+10);
                     points.setText("Money: "+String.valueOf(thePlayer.getScore()));
                 }
+            }
+            for(Sprite s: toRemove){
+                s.setVisible(false);
+                if(s instanceof Bullet)
+                    allBullets.remove(s);
+                else if(s instanceof Enemy)
+                    enemies.remove(s);
+                else if(s instanceof Coin)
+                    allCoins.remove(s);
+                remove(s);
             }
 
             repaint();
