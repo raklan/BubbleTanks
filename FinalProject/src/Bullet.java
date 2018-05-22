@@ -18,6 +18,10 @@ public class Bullet extends Sprite {
         }
     }
 
+    public Bullet(int i, int i1, double angle, boolean b) {
+        this(i, i1, angle, b, null);
+    }
+
     public boolean isPlayer(){
         return player;
     }
