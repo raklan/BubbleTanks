@@ -5,18 +5,22 @@ import java.awt.event.MouseMotionListener;
 
 public class Turret extends Sprite implements MouseMotionListener {
 
-    Tank tank;
+    Sprite tank;
     double angle = 0.00;
 
     int mx, my;
 
-    public Turret(Tank t){
+    public Turret(Sprite t){
         super(0, 0, 100, 100, "src/resources/Lvl1Turret.png");
         tank = t;
     }
 
     public double getAngle(){
         return angle;
+    }
+
+    public void setAngle(double a){
+        angle = a;
     }
 
     @Override

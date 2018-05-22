@@ -16,20 +16,17 @@ protected Image content;
 	public EzImage()  {
 		super();
 		setBounds(0, 0, 10, 10);
-		addMouseListener(this);
 	}
 
 	public EzImage(int x, int y, int w, int h)  {
 		super();
 		setBounds(x, y, w, h);
-		addMouseListener(this);
 	} 
 
 	public EzImage(int x, int y, int w, int h, String s)  {
 		super();
 		setBounds(x, y, w, h);
         setImage(s);
-        addMouseListener(this);
 	} 
 
 // ----- will set the image to a new picture named s -------------------------------    
@@ -53,8 +50,8 @@ protected Image content;
 	public void paint(Graphics g)  {
 		g.drawImage(content, 0, 0, getWidth(), getHeight(), this);
         paintChildren(g);
-	} 
-	
+	}
+
 	public void mouseClicked(MouseEvent e){}
 	public void mouseExited(MouseEvent e){}
 	public void mousePressed(MouseEvent e){}

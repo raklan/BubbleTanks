@@ -79,6 +79,10 @@ public class Game extends JFrame {
         allBullets.add(b);
     }
 
+    public Sprite getTank(){
+        return tank;
+    }
+
     class MyTimerTask extends TimerTask{
 
         @Override

@@ -151,7 +151,7 @@ Tank extends Sprite implements KeyListener {
     public void mouseReleased(MouseEvent e) {
         double angle = turret.getAngle();
         angle = angle - Math.PI/2;
-        win.addBullet(new Bullet(x+25, y+25, angle));
+        win.addBullet(new Bullet(x+25, y+25, angle, true));
     }
 
     public void paint(Graphics g)  {
