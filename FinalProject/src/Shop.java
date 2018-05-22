@@ -14,9 +14,10 @@ public class Shop extends JFrame implements ActionListener{
     private JButton maxHP;
     private JButton life;
 
-    Tank player;
+    Tank tank;
+    Player player;
 
-    public Shop(JFrame frame, Tank tank){
+    public Shop(JFrame frame, Tank t, Player p){
         super();
         setBounds(frame.getX(),frame.getY(),frame.getWidth(),frame.getHeight());
         setVisible(true);
@@ -50,7 +51,8 @@ public class Shop extends JFrame implements ActionListener{
         life.setVisible(true);
         life.addActionListener(this);
 
-        player = tank;
+        tank = t;
+        player = p;
 
         add(speedUpgrade);
         add(bulletSpeed);
@@ -62,11 +64,14 @@ public class Shop extends JFrame implements ActionListener{
     @Override
     public void actionPerformed(ActionEvent e) {
         if(e.getSource()==speedUpgrade)
-            player.setSpeed(player.getDx()+1, player.getDy()+1);
+            tank.setSpeed(tank.getDx()+1, tank.getDy()+1);
+
         else if(e.getSource()==bulletSpeed)
-            System.out.println("Bullet");
+            player.setBulletBuff(player.getBulletBuff()+1);
+
         else if(e.getSource()==maxHP)
             System.out.println("HP");
+
         else if(e.getSource()==life)
             System.out.println("Life");
     }

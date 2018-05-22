@@ -12,17 +12,20 @@ Tank extends Sprite implements KeyListener {
     boolean left = false;
     boolean right = false;
 
+    Player player;
+
     int dir; //0-7, every 45 deg, clockwise starting up
 
     Turret turret;
     Game win;
 
-    public Tank(int x, int y, int width, int height, Game j){
+    public Tank(int x, int y, int width, int height, Game j, Player p){
         super(x,y,width,height, "src/resources/Lvl1Tank.png");
         addKeyListener(this);
         turret = new Turret(this);
         add(turret);
         win = j;
+        player = p;
     }
 
     public Turret getTurret(){
@@ -151,7 +154,7 @@ Tank extends Sprite implements KeyListener {
     public void mouseReleased(MouseEvent e) {
         double angle = turret.getAngle();
         angle = angle - Math.PI/2;
-        win.addBullet(new Bullet(x+25, y+25, angle, true));
+        win.addBullet(new Bullet(x+25, y+25, angle, true, player));
     }
 
     public void paint(Graphics g)  {
