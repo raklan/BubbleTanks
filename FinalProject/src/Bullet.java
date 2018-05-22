@@ -4,10 +4,13 @@ public class Bullet extends Sprite {
     int dx;
     int dy;
 
-    public Bullet(int x, int y, double angle){
+    boolean player;
+
+    public Bullet(int x, int y, double angle, boolean p){
         super(x,y,50, 50, "src/resources/TankBullet.png");
         dx = (int)(Math.cos(angle) * speed);
         dy = (int)(Math.sin(angle) * speed);
+        player = p;
     }
 
     @Override

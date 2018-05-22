@@ -56,7 +56,6 @@ public abstract class Sprite extends EzImage {
 
     public boolean collides(Sprite collidesWith){
         if(rec.intersects(collidesWith.getRec())) {
-            System.out.println("aaaaah");
             return true;
         }
         else
