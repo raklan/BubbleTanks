@@ -1,38 +1,59 @@
 public class Player{
 
-    public int topScore;
-    public long currentScore;
+    private int topScore;
+    private long currentScore;
 
-    public int lives;
+    private int bulletBuff;
+
+    private int lives;
+    private int maxLives;
 
     public Player(){
         currentScore = 0;
         lives = 3;
+        maxLives = 3;
     }
 
     //Returns the High Score
     public int getTopScore(){
         return topScore;
     }
+
     //Returns the Player's Current Score
     public long getScore() {
         return currentScore;
     }
+
     //Returns the Current number of lives
     public int getLives() {
         return lives;
     }
+
     //Sets a new High Score. Checks to make sure
     public void setTopScore(int newScore) {
         if(topScore<newScore)
             topScore = newScore;
     }
+
     //Sets the Player's current score
     public void setScore(long score) {
         currentScore = score;
     }
+
     //Sets the Player's Lives
     public void setLives(int lives) {
         this.lives = lives;
     }
+
+    public void setBulletBuff(int newBuff){
+        bulletBuff = newBuff;
+    }
+
+    public int getBulletBuff(){
+        return bulletBuff;
+    }
+
+    public int getMaxLives(){return maxLives;}
+
+    public void setMaxLives(int newMax){maxLives = newMax;}
 }

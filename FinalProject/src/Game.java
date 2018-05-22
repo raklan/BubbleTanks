@@ -33,16 +33,16 @@ public class Game extends JFrame {
         setLayout(null);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
+        thePlayer = new Player();
+        thePlayer.setScore(0);
+
         enviro = new GRectangle(getWidth()*(-1), getHeight()*(-1), getWidth()*3, getHeight()*3);
         enviro.setBackground(Color.CYAN);
         add(enviro, 0);
 
-        tank = new Tank(100, 100, 100, 100, this);
+        tank = new Tank(100, 100, 100, 100, this, thePlayer);
         tank.setFocusable(true);
         add(tank, 0);
-
-        thePlayer = new Player();
-        thePlayer.setScore(0);
 
         points = new JLabel("");
         points.setText("Money: "+String.valueOf(thePlayer.getScore()));
@@ -113,7 +113,7 @@ public class Game extends JFrame {
                         toRemove.add(e);
                         toRemove.add(b);
                     }
-                    if(b.collides(tank)) {
+                    if(b.collides(tank)&&!b.isPlayer()) {
                         thePlayer.setLives(thePlayer.getLives() - 1);
                         lives.setText("Lives: "+thePlayer.getLives());
                     }
