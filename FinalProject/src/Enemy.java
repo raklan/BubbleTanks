@@ -6,7 +6,7 @@ public class Enemy extends Sprite{
 
     Random gen = new Random();
 
-    private Game game;
+    public static Game game;
 
     public Enemy(int x, int y, int width, int height, Game theGame){
         super(x,y,width,height, "src/resources/Lvl1Tank.png");
@@ -15,6 +15,10 @@ public class Enemy extends Sprite{
 
         dx=4;
         dy=4;
+    }
+
+    public static Game getGame(){
+        return game;
     }
 
     @Override

@@ -7,7 +7,7 @@ public class Player{
 
     public Player(){
         currentScore = 0;
-        lives = 1;
+        lives = 3;
     }
 
     //Returns the High Score

@@ -23,11 +23,12 @@ public class Game extends JFrame {
     Player thePlayer;
 
     JLabel points;
+    JLabel lives;
 
     public Game()
     {
         super("Bubble Tanks");
-        setSize(1000, 1000);
+        setBounds(100,100,1000, 1000);
         setLocationRelativeTo(null);
         setLayout(null);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -48,6 +49,12 @@ public class Game extends JFrame {
         points.setBounds(0,0,200,50);
         points.setVisible(true);
         add(points, 0);
+
+        lives = new JLabel("");
+        lives.setText("Lives: "+String.valueOf(thePlayer.getLives()));
+        lives.setBounds(0,50,200,50);
+        lives.setVisible(true);
+        add(lives, 0);
 
         //Instantiates X number of enemy tanks. Change the i<=X to add more enemies
         for(int i = 1; i<=10; i++){
@@ -80,6 +87,14 @@ public class Game extends JFrame {
 
             for(Bullet b: allBullets){
                 b.move();
+                if(b.getX()>Enemy.game.getWidth())
+                    toRemove.add(b);
+                if(b.getY()>Enemy.game.getHeight())
+                    toRemove.add(b);
+                if(b.getX()<0)
+                    toRemove.add(b);
+                if(b.getY()<0)
+                    toRemove.add(b);
             }
 
             for(Enemy e: enemies){
@@ -94,8 +109,10 @@ public class Game extends JFrame {
                         toRemove.add(e);
                         toRemove.add(b);
                     }
-                    if(b.collides(tank))
+                    if(b.collides(tank)) {
                         thePlayer.setLives(thePlayer.getLives() - 1);
+                        lives.setText("Lives: "+thePlayer.getLives());
+                    }
                 }
 
             }

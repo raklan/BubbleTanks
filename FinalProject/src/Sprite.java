@@ -25,6 +25,13 @@ public abstract class Sprite extends EzImage {
         dy=deltay;
     }
 
+    public int getDy(){
+        return dy;
+    }
+    public int getDx(){
+        return dx;
+    }
+
     public void setLocation(int x, int y){
         super.setLocation(x,y);
         rec.setLocation(x,y);
