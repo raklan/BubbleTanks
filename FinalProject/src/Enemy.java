@@ -17,7 +17,7 @@ public class Enemy extends Sprite{
     int interval = 100;
 
     public Enemy(int x, int y, int width, int height, Game theGame){
-        super(x,y,width,height, "src/resources/Lvl1Tank.png");
+        super(x,y,width,height, "src/resources/Lvl1Enemy.png");
 
         game = theGame;
 

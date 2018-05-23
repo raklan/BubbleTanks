@@ -14,6 +14,11 @@ public class Shop extends JFrame implements ActionListener{
     private JButton maxHP;
     private JButton life;
 
+    private static int speedCost = 100;
+    private static int bulletCost = 100;
+    private static int HPCost = 100;
+    private static int lifeCost = 50;
+
     Tank tank;
     Player player;
 
@@ -31,23 +36,23 @@ public class Shop extends JFrame implements ActionListener{
         title.setFont(new Font("Times New Roman", ITALIC, 100));
         title.setHorizontalAlignment(SwingConstants.CENTER);
 
-        speedUpgrade = new JButton("Upgrade Tank Speed");
-        speedUpgrade.setBounds(100,200,200,100);
+        speedUpgrade = new JButton("Upgrade Tank Speed \n Cost: "+speedCost);
+        speedUpgrade.setBounds(100,200,400,100);
         speedUpgrade.setVisible(true);
         speedUpgrade.addActionListener(this);
 
-        bulletSpeed = new JButton("Upgrade Bullet Speed");
-        bulletSpeed.setBounds(700,200,200,100);
+        bulletSpeed = new JButton("Upgrade Bullet Speed  \n Cost: "+bulletCost);
+        bulletSpeed.setBounds(500,200,400,100);
         bulletSpeed.setVisible(true);
         bulletSpeed.addActionListener(this);
 
-        maxHP = new JButton("Upgrade Max HP");
-        maxHP.setBounds(100,600,200,100);
+        maxHP = new JButton("Upgrade Max HP \n Cost: "+HPCost);
+        maxHP.setBounds(100,600,400,100);
         maxHP.setVisible(true);
         maxHP.addActionListener(this);
 
-        life = new JButton("Buy Another Life");
-        life.setBounds(700,600,200,100);
+        life = new JButton("Buy Another Life \n Cost: "+lifeCost);
+        life.setBounds(500,600,400,100);
         life.setVisible(true);
         life.addActionListener(this);
 
@@ -63,16 +68,32 @@ public class Shop extends JFrame implements ActionListener{
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        if(e.getSource()==speedUpgrade)
-            tank.setSpeed(tank.getDx()+1, tank.getDy()+1);
+        if(e.getSource()==speedUpgrade) {
+            tank.setSpeed(tank.getDx() + 1, tank.getDy() + 1);
+            player.setScore(player.getScore()-speedCost);
+            speedCost+=(speedCost/4);
+            speedUpgrade.setText("Upgrade Tank Speed \n Cost: "+speedCost);
+        }
 
-        else if(e.getSource()==bulletSpeed)
-            player.setBulletBuff(player.getBulletBuff()+1);
+        else if(e.getSource()==bulletSpeed) {
+            player.setBulletBuff(player.getBulletBuff() + 1);
+            player.setScore(player.getScore()-bulletCost);
+            bulletCost+=(bulletCost/4);
+            bulletSpeed.setText("Upgrade Bullet Speed  \n Cost: "+bulletCost);
+        }
 
-        else if(e.getSource()==maxHP)
-            System.out.println("HP");
+        else if(e.getSource()==maxHP) {
+            player.setMaxLives(player.getMaxLives() + 1);
+            player.setScore(player.getScore()-HPCost);
+            HPCost+=(HPCost/4);
+            maxHP.setText("Upgrade Max HP \n Cost: "+HPCost);
+        }
 
-        else if(e.getSource()==life)
-            System.out.println("Life");
+        else if(e.getSource()==life) {
+            player.setLives(player.getLives() + 1);
+            player.setScore(player.getScore()-lifeCost);
+            lifeCost+=(lifeCost/4);
+            life.setText("Buy Another Life \n Cost: "+lifeCost);
+        }
     }
 }

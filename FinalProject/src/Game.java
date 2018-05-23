@@ -65,6 +65,8 @@ public class Game extends JFrame {
             add(e,0);
         }
 
+        Shop shop =(new Shop(this,tank,thePlayer));
+
         addMouseMotionListener(tank.getTurret());
         addMouseListener(tank);
 
@@ -87,6 +89,7 @@ public class Game extends JFrame {
 
         @Override
         public void run() {
+            lives.setText("Lives: "+thePlayer.getLives());
             tank.move();
 
             for(Bullet b: allBullets){
@@ -104,7 +107,7 @@ public class Game extends JFrame {
             for(Enemy e: enemies){
                 e.move();
                 for(Bullet b: allBullets) {
-                    if (b.collides(e)) {
+                    if (b.collides(e)&&b.isPlayer()) {
                         newCoin = new Coin(e.getX(), e.getY(), 25, 25);
                         newCoin.setVisible(true);
                         add(newCoin,0);
@@ -114,6 +117,7 @@ public class Game extends JFrame {
                         toRemove.add(b);
                     }
                     if(b.collides(tank)&&!b.isPlayer()) {
+                        toRemove.add(b);
                         thePlayer.setLives(thePlayer.getLives() - 1);
                         lives.setText("Lives: "+thePlayer.getLives());
                     }
