@@ -146,6 +146,10 @@ Tank extends Sprite implements KeyListener {
                 right=false;
                 dx-=10;
                 break;
+
+            case KeyEvent.VK_G:
+                win.pause();
+                break;
         }
         setDirection();
     }

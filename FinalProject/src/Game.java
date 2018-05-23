@@ -85,6 +85,10 @@ public class Game extends JFrame {
         return tank;
     }
 
+    public void pause(){
+        t.cancel();
+    }
+
     class MyTimerTask extends TimerTask{
 
         @Override
