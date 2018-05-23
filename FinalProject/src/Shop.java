@@ -2,10 +2,12 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 
 import static java.awt.Font.*;
 
-public class Shop extends JFrame implements ActionListener{
+public class Shop extends JFrame implements ActionListener, KeyListener{
 
     private JLabel title;
 
@@ -22,10 +24,13 @@ public class Shop extends JFrame implements ActionListener{
     Tank tank;
     Player player;
 
-    public Shop(JFrame frame, Tank t, Player p){
+    Game game;
+
+    public Shop(Game frame, Tank t, Player p){
         super();
+        game = frame;
         setBounds(frame.getX(),frame.getY(),frame.getWidth(),frame.getHeight());
-        setVisible(true);
+        setVisible(false);
         setBackground(Color.RED);
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setLayout(null);
@@ -64,6 +69,8 @@ public class Shop extends JFrame implements ActionListener{
         add(maxHP);
         add(life);
         add(title,0);
+        addKeyListener(this);
+        setFocusable(true);
     }
 
     @Override
@@ -94,6 +101,24 @@ public class Shop extends JFrame implements ActionListener{
             player.setScore(player.getScore()-lifeCost);
             lifeCost+=(lifeCost/4);
             life.setText("Buy Another Life \n Cost: "+lifeCost);
+        }
+        requestFocus();
+    }
+
+    @Override
+    public void keyTyped(KeyEvent e) {
+
+    }
+
+    @Override
+    public void keyPressed(KeyEvent e) {
+
+    }
+
+    @Override
+    public void keyReleased(KeyEvent e) {
+        if(e.getKeyCode()==KeyEvent.VK_ESCAPE){
+            game.unpause();
         }
     }
 }

@@ -25,6 +25,8 @@ public class Game extends JFrame {
     JLabel points;
     JLabel lives;
 
+    Shop shop;
+
     public Game()
     {
         super("Bubble Tanks");
@@ -65,7 +67,7 @@ public class Game extends JFrame {
             add(e,0);
         }
 
-        Shop shop =(new Shop(this,tank,thePlayer));
+        shop =(new Shop(this,tank,thePlayer));
 
         addMouseMotionListener(tank.getTurret());
         addMouseListener(tank);
@@ -87,6 +89,15 @@ public class Game extends JFrame {
 
     public void pause(){
         t.cancel();
+        shop.setVisible(true);
+    }
+
+    public void unpause(){
+        toFront();
+        requestFocus();
+        tank.requestFocus();
+        t = new Timer();
+        t.schedule(new MyTimerTask(), 0, 1000/fps);
     }
 
     class MyTimerTask extends TimerTask{
