@@ -5,6 +5,8 @@ public class Player{
 
     private int bulletBuff;
 
+    private int speedBuff;
+
     private int lives;
     private int maxLives;
 
@@ -56,4 +58,12 @@ public class Player{
     public int getMaxLives(){return maxLives;}
 
     public void setMaxLives(int newMax){maxLives = newMax;}
+
+    public int getSpeedBuff() {
+        return speedBuff;
+    }
+
+    public void setSpeedBuff(int speedBuff) {
+        this.speedBuff = speedBuff;
+    }
 }

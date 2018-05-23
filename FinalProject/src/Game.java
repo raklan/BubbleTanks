@@ -7,7 +7,7 @@ import java.util.TimerTask;
 public class Game extends JFrame {
 
     GRectangle enviro;
-    Tank tank;
+    protected static Tank tank;
 
     ArrayList<Enemy> enemies = new ArrayList<>();
     ArrayList<Coin> allCoins = new ArrayList<>();
@@ -20,7 +20,7 @@ public class Game extends JFrame {
     Timer t = new Timer();
     int fps = 40;
 
-    Player thePlayer;
+    protected static Player thePlayer;
 
     JLabel points;
     JLabel lives;
@@ -67,7 +67,7 @@ public class Game extends JFrame {
             add(e,0);
         }
 
-        shop =(new Shop(this,tank,thePlayer));
+        shop = new Shop(this);
 
         addMouseMotionListener(tank.getTurret());
         addMouseListener(tank);

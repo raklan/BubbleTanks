@@ -9,8 +9,6 @@ public class Bullet extends Sprite {
 
     public Bullet(int x, int y, double angle, boolean p, Player thePlayer){
         super(x,y,25, 25, "src/resources/TankBullet.png");
-        dx = (int)(Math.cos(angle) * speed);
-        dy = (int)(Math.sin(angle) * speed);
         player = p;
         if(p) {
             buff = thePlayer.getBulletBuff();
@@ -18,6 +16,8 @@ public class Bullet extends Sprite {
         }
         else
             setImage("src/resources/EnemyBullet.png");
+        dx = (int)(Math.cos(angle) * speed);
+        dy = (int)(Math.sin(angle) * speed);
     }
 
     public Bullet(int i, int i1, double angle, boolean b) {

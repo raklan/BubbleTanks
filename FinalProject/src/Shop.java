@@ -21,12 +21,9 @@ public class Shop extends JFrame implements ActionListener, KeyListener{
     private static int HPCost = 100;
     private static int lifeCost = 50;
 
-    Tank tank;
-    Player player;
-
     Game game;
 
-    public Shop(Game frame, Tank t, Player p){
+    public Shop(Game frame){
         super();
         game = frame;
         setBounds(frame.getX(),frame.getY(),frame.getWidth(),frame.getHeight());
@@ -61,9 +58,6 @@ public class Shop extends JFrame implements ActionListener, KeyListener{
         life.setVisible(true);
         life.addActionListener(this);
 
-        tank = t;
-        player = p;
-
         add(speedUpgrade);
         add(bulletSpeed);
         add(maxHP);
@@ -76,31 +70,37 @@ public class Shop extends JFrame implements ActionListener, KeyListener{
     @Override
     public void actionPerformed(ActionEvent e) {
         if(e.getSource()==speedUpgrade) {
-            tank.setSpeed(tank.getDx() + 1, tank.getDy() + 1);
-            player.setScore(player.getScore()-speedCost);
+            Game.thePlayer.setSpeedBuff(Game.thePlayer.getSpeedBuff()+1);
+            Game.thePlayer.setScore(Game.thePlayer.getScore()-speedCost);
             speedCost+=(speedCost/4);
             speedUpgrade.setText("Upgrade Tank Speed \n Cost: "+speedCost);
         }
 
         else if(e.getSource()==bulletSpeed) {
-            player.setBulletBuff(player.getBulletBuff() + 1);
-            player.setScore(player.getScore()-bulletCost);
+            Game.thePlayer.setBulletBuff(Game.thePlayer.getBulletBuff() + 1000000);
+            Game.thePlayer.setScore(Game.thePlayer.getScore()-bulletCost);
             bulletCost+=(bulletCost/4);
             bulletSpeed.setText("Upgrade Bullet Speed  \n Cost: "+bulletCost);
         }
 
         else if(e.getSource()==maxHP) {
-            player.setMaxLives(player.getMaxLives() + 1);
-            player.setScore(player.getScore()-HPCost);
+            Game.thePlayer.setMaxLives(Game.thePlayer.getMaxLives() + 1);
+            Game.thePlayer.setScore(Game.thePlayer.getScore()-HPCost);
             HPCost+=(HPCost/4);
             maxHP.setText("Upgrade Max HP \n Cost: "+HPCost);
+            life.setText("Buy Another Life \n Cost: " + lifeCost);
         }
 
         else if(e.getSource()==life) {
-            player.setLives(player.getLives() + 1);
-            player.setScore(player.getScore()-lifeCost);
-            lifeCost+=(lifeCost/4);
-            life.setText("Buy Another Life \n Cost: "+lifeCost);
+            if(Game.thePlayer.getLives()<Game.thePlayer.getMaxLives()){
+                Game.thePlayer.setLives(Game.thePlayer.getLives() + 1);
+                Game.thePlayer.setScore(Game.thePlayer.getScore() - lifeCost);
+                lifeCost += (lifeCost / 4);
+                life.setText("Buy Another Life \n Cost: " + lifeCost);
+            }
+            else{
+                life.setText("Max Lives Reached!");
+            }
         }
         requestFocus();
     }
