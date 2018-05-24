@@ -8,7 +8,7 @@ public class Player{
     private int speedBuff;
 
     private int lives;
-    private int maxLives = 3;
+    private int maxLives = 5;
 
     public Player(){
         reset();
@@ -16,6 +16,7 @@ public class Player{
 
     public void reset(){
         currentScore = 0;
+        maxLives=5;
         lives = maxLives;
         bulletBuff=0;
         speedBuff=0;

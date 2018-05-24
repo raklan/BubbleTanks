@@ -27,7 +27,7 @@ public class Enemy extends Sprite{
         turret = new Turret(this);
         add(turret);
 
-        time = gen.nextInt(100);
+        time = gen.nextInt(100)+50;
     }
 
     public static Game getGame(){
@@ -64,12 +64,12 @@ public class Enemy extends Sprite{
             error -= (chance%2==0)? 0.01:-0.01;
         }
         angle+=error;
-        turret.setAngle(Math.PI*2-angle);
+        turret.setAngle(angle-Math.PI/2);
         //============END TURRET CODE==============
 
         //==============SHOOTING CODE=============
         if(--time<=0){
-            angle = angle - Math.PI/2;
+            angle-=Math.PI;
             game.addBullet(new Bullet(getX()+25, getY()+25, angle, false));
             time=interval;
         }

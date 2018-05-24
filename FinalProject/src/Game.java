@@ -57,7 +57,7 @@ public class Game extends JFrame {
         add(points, 0);
 
         lives = new JLabel("");
-        lives.setBounds(0,50,200,50);
+        lives.setBounds(0,50,300,50);
         lives.setVisible(true);
         add(lives, 0);
 
@@ -83,15 +83,19 @@ public class Game extends JFrame {
         shop.reset();
         tank.setLocation(getWidth()/2-50, getHeight()/2-50);
         points.setText("Money: "+String.valueOf(thePlayer.getScore()));
-        lives.setText("Lives: "+String.valueOf(thePlayer.getLives()));
 
         t = new Timer();
         t.schedule(new MyTimerTask(), 0, 1000/fps);
     }
 
-    public void addBullet(Bullet b){
+    public synchronized void addBullet(Bullet b){
         add(b, 0);
         allBullets.add(b);
+        if(allBullets.size()>50)
+        {
+            remove(allBullets.get(allBullets.size()-1));
+            allBullets.remove(allBullets.size()-1);
+        }
     }
 
     public Sprite getTank(){
@@ -161,7 +165,7 @@ public class Game extends JFrame {
                 wave.setText("Wave: "+waveNum);
                 waveX(waveNum);
             }
-            lives.setText("Lives: "+thePlayer.getLives());
+            lives.setText("Lives: "+thePlayer.getLives()+" / "+ thePlayer.getMaxLives());
             tank.move();
 
             for(Bullet b: allBullets){

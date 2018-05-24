@@ -174,7 +174,7 @@ public class Shop extends JFrame implements ActionListener, KeyListener{
 
     @Override
     public void keyReleased(KeyEvent e) {
-        if(e.getKeyCode()==KeyEvent.VK_ESCAPE){
+        if(e.getKeyCode()==KeyEvent.VK_G){
             game.unpause();
             setVisible(false);
         }
