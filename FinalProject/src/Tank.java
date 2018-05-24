@@ -95,28 +95,28 @@ Tank extends Sprite implements KeyListener {
             case KeyEvent.VK_W:
                 if(!up){
                     up=true;
-                    dy-=(10+Game.thePlayer.getSpeedBuff());
+                    dy-=(10+player.getSpeedBuff());
                 }
                 break;
 
             case KeyEvent.VK_S:
                 if(!down){
                     down=true;
-                    dy+=(10+Game.thePlayer.getSpeedBuff());
+                    dy+=(10+player.getSpeedBuff());
                 }
                 break;
 
             case KeyEvent.VK_A:
                 if(!left){
                     left=true;
-                    dx-=(10+Game.thePlayer.getSpeedBuff());
+                    dx-=(10+player.getSpeedBuff());
                 }
                 break;
 
             case KeyEvent.VK_D:
                 if(!right){
                     right=true;
-                    dx+=(10+Game.thePlayer.getSpeedBuff());
+                    dx+=(10+player.getSpeedBuff());
                 }
                 break;
         }
@@ -129,22 +129,22 @@ Tank extends Sprite implements KeyListener {
         {
             case KeyEvent.VK_W:
                 up=false;
-                dy+=(10+Game.thePlayer.getSpeedBuff());
+                dy+=(10+player.getSpeedBuff());
                 break;
 
             case KeyEvent.VK_S:
                 down=false;
-                dy-=(10+Game.thePlayer.getSpeedBuff());
+                dy-=(10+player.getSpeedBuff());
                 break;
 
             case KeyEvent.VK_A:
                 left=false;
-                dx+=(10+Game.thePlayer.getSpeedBuff());
+                dx+=(10+player.getSpeedBuff());
                 break;
 
             case KeyEvent.VK_D:
                 right=false;
-                dx-=(10+Game.thePlayer.getSpeedBuff());
+                dx-=(10+player.getSpeedBuff());
                 break;
 
             case KeyEvent.VK_G:

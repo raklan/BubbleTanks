@@ -8,12 +8,15 @@ public class Player{
     private int speedBuff;
 
     private int lives;
-    private int maxLives;
+    private int maxLives = 3;
 
     public Player(){
+        reset();
+    }
+
+    public void reset(){
         currentScore = 0;
-        lives = 3;
-        maxLives = 3;
+        lives = maxLives;
     }
 
     //Returns the High Score

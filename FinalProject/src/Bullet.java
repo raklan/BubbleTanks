@@ -12,7 +12,7 @@ public class Bullet extends Sprite {
         player = p;
         if(p) {
             buff = thePlayer.getBulletBuff();
-            addBuff();
+            speed+=buff;
         }
         else
             setImage("src/resources/EnemyBullet.png");
