@@ -1,11 +1,12 @@
 
 import javax.swing.*;
 import java.awt.*;
-import java.util.ArrayList;
-import java.util.Random;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.*;
 import java.util.Timer;
-import java.util.TimerTask;
-public class Game extends JFrame {
+
+public class Game extends JFrame{
 
     GRectangle enviro;
     protected static Tank tank;
@@ -18,7 +19,7 @@ public class Game extends JFrame {
 
     Coin newCoin;
 
-    Timer t;
+    protected static Timer t;
     int fps = 40;
 
     protected Player thePlayer;
@@ -36,18 +37,17 @@ public class Game extends JFrame {
     public Game()
     {
         super("Bubble Tanks");
-        setBounds(100,100,1500, 1000);
+        setExtendedState(JFrame.MAXIMIZED_BOTH);
+        setUndecorated(true);
         setLocationRelativeTo(null);
         setLayout(null);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         thePlayer = new Player();
 
-        enviro = new GRectangle(getWidth()*(-1), getHeight()*(-1), getWidth()*3, getHeight()*3);
-        enviro.setBackground(Color.CYAN);
-        add(enviro, 0);
+        this.getContentPane().setBackground(new Color(166, 180, 166, 255));
 
-        tank = new Tank(getWidth()/2-50, getHeight()/2-50, 100, 100, this, thePlayer);
+        tank = new Tank(500, 50, 100, 100, this, thePlayer);
         tank.setFocusable(true);
         add(tank, 0);
 
@@ -156,70 +156,72 @@ public class Game extends JFrame {
 
         @Override
         public void run() {
-            if(enemies.isEmpty()) {
-                waveNum+=1;
-                wave.setText("Wave: "+waveNum);
-                waveX(waveNum);
-            }
-            lives.setText("Lives: "+thePlayer.getLives());
-            tank.move();
-
-            for(Bullet b: allBullets){
-                b.move();
-                if(b.getX()>Enemy.game.getWidth())
-                    toRemove.add(b);
-                if(b.getY()>Enemy.game.getHeight())
-                    toRemove.add(b);
-                if(b.getX()<0)
-                    toRemove.add(b);
-                if(b.getY()<0)
-                    toRemove.add(b);
-                if(b.collides(tank)&&!b.isPlayer()) {
-                    toRemove.add(b);
-                    thePlayer.setLives(thePlayer.getLives() - 1);
-                    lives.setText("Lives: "+thePlayer.getLives());
+            try {
+                if (enemies.isEmpty()) {
+                    waveNum += 1;
+                    wave.setText("Wave: " + waveNum);
+                    waveX(waveNum);
                 }
-            }
+                lives.setText("Lives: " + thePlayer.getLives());
+                tank.move();
 
-            for(Enemy e: enemies){
-                e.move();
-                for(Bullet b: allBullets) {
-                    if (b.collides(e)&&b.isPlayer()) {
-                        newCoin = new Coin(e.getX(), e.getY(), 25, 25);
-                        newCoin.setVisible(true);
-                        add(newCoin,0);
-                        allCoins.add(newCoin);
-
-                        toRemove.add(e);
+                for (Bullet b : allBullets) {
+                    b.move();
+                    if (b.getX() > Enemy.game.getWidth())
                         toRemove.add(b);
+                    if (b.getY() > Enemy.game.getHeight())
+                        toRemove.add(b);
+                    if (b.getX() < 0)
+                        toRemove.add(b);
+                    if (b.getY() < 0)
+                        toRemove.add(b);
+                    if (b.collides(tank) && !b.isPlayer()) {
+                        toRemove.add(b);
+                        thePlayer.setLives(thePlayer.getLives() - 1);
+                        lives.setText("Lives: " + thePlayer.getLives());
                     }
                 }
 
-            }
+                for (Enemy e : enemies) {
+                    e.move();
+                    for (Bullet b : allBullets) {
+                        if (b.collides(e) && b.isPlayer()) {
+                            newCoin = new Coin(e.getX(), e.getY(), 25, 25);
+                            newCoin.setVisible(true);
+                            add(newCoin, 0);
+                            allCoins.add(newCoin);
 
-            for(Coin c: allCoins){
-                if(tank.collides(c)){
-                    toRemove.add(c);
-                    thePlayer.setScore(thePlayer.getScore()+10);
-                    shop.updateScore(thePlayer.getScore());
-                    points.setText("Money: "+String.valueOf(thePlayer.getScore()));
+                            toRemove.add(e);
+                            toRemove.add(b);
+                        }
+                    }
+
                 }
-            }
-            for(Sprite s: toRemove){
-                s.setVisible(false);
-                if(s instanceof Bullet)
-                    allBullets.remove(s);
-                else if(s instanceof Enemy)
-                    enemies.remove(s);
-                else if(s instanceof Coin)
-                    allCoins.remove(s);
-                remove(s);
-            }
 
-            repaint();
-            if(thePlayer.getLives()<=0){
-                gameOver();
-            }
+                for (Coin c : allCoins) {
+                    if (tank.collides(c)) {
+                        toRemove.add(c);
+                        thePlayer.setScore(thePlayer.getScore() + 10);
+                        shop.updateScore(thePlayer.getScore());
+                        points.setText("Money: " + String.valueOf(thePlayer.getScore()));
+                    }
+                }
+                for (Sprite s : toRemove) {
+                    s.setVisible(false);
+                    if (s instanceof Bullet)
+                        allBullets.remove(s);
+                    else if (s instanceof Enemy)
+                        enemies.remove(s);
+                    else if (s instanceof Coin)
+                        allCoins.remove(s);
+                    remove(s);
+                }
+
+                repaint();
+                if (thePlayer.getLives() <= 0) {
+                    gameOver();
+                }
+            }catch(ConcurrentModificationException e){}
         }
     }
 }
