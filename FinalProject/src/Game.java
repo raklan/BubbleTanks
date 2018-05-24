@@ -2,6 +2,7 @@
 import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
+import java.util.Random;
 import java.util.Timer;
 import java.util.TimerTask;
 public class Game extends JFrame {
@@ -24,6 +25,11 @@ public class Game extends JFrame {
 
     JLabel points;
     JLabel lives;
+    JLabel wave;
+
+    Random gen = new Random();
+
+    private static int waveNum;
 
     Shop shop;
 
@@ -55,6 +61,12 @@ public class Game extends JFrame {
         lives.setVisible(true);
         add(lives, 0);
 
+        wave = new JLabel("");
+        wave.setBounds(0,100,200,50);
+        wave.setVisible(true);
+        add(wave, 0);
+
+        waveNum = 0;
         setup();
 
         shop = new Shop(this);
@@ -71,14 +83,6 @@ public class Game extends JFrame {
         points.setText("Money: "+String.valueOf(thePlayer.getScore()));
         lives.setText("Lives: "+String.valueOf(thePlayer.getLives()));
 
-        //Instantiates X number of enemy tanks. Change the i<=X to add more enemies
-        for(int i = 1; i<=10; i++){
-            enemies.add(new Enemy(i*50,i*50,100,100,this));
-        }
-        for(Enemy e: enemies){
-            e.setVisible(true);
-            add(e,0);
-        }
         t = new Timer();
         t.schedule(new MyTimerTask(), 0, 1000/fps);
     }
@@ -98,6 +102,10 @@ public class Game extends JFrame {
 
     public void pause(){
         t.cancel();
+        Shop.speedUpgrade.setText("Upgrade Tank Speed \n Cost: " + Shop.speedCost);
+        Shop.bulletSpeed.setText("Upgrade Bullet Speed  \n Cost: " + Shop.bulletCost);
+        Shop.maxHP.setText("Upgrade Max HP \n Cost: " + Shop.HPCost);
+        Shop.life.setText("Buy Another Life \n Cost: " + Shop.lifeCost);
         shop.setVisible(true);
     }
 
@@ -130,10 +138,26 @@ public class Game extends JFrame {
         }
     }
 
+    public void waveX(int waveN){
+        //Instantiates waveNum number of enemy tanks. For our purposes, the number of enemies is equal to the wave the player is on.
+        for(int i = 1; i<=waveN; i++){
+            enemies.add(new Enemy(gen.nextInt(500)+200,gen.nextInt(500)+200,100,100,this));
+        }
+        for(Enemy e: enemies){
+            e.setVisible(true);
+            add(e,0);
+        }
+    }
+
     class MyTimerTask extends TimerTask{
 
         @Override
         public void run() {
+            if(enemies.isEmpty()) {
+                waveNum+=1;
+                wave.setText("Wave: "+waveNum);
+                waveX(waveNum);
+            }
             lives.setText("Lives: "+thePlayer.getLives());
             tank.move();
 
@@ -147,6 +171,11 @@ public class Game extends JFrame {
                     toRemove.add(b);
                 if(b.getY()<0)
                     toRemove.add(b);
+                if(b.collides(tank)&&!b.isPlayer()) {
+                    toRemove.add(b);
+                    thePlayer.setLives(thePlayer.getLives() - 1);
+                    lives.setText("Lives: "+thePlayer.getLives());
+                }
             }
 
             for(Enemy e: enemies){
@@ -163,14 +192,6 @@ public class Game extends JFrame {
                     }
                 }
 
-            }
-
-            for(Bullet b: allBullets){
-                if(b.collides(tank)&&!b.isPlayer()) {
-                    toRemove.add(b);
-                    thePlayer.setLives(thePlayer.getLives() - 1);
-                    lives.setText("Lives: "+thePlayer.getLives());
-                }
             }
 
             for(Coin c: allCoins){

@@ -11,15 +11,15 @@ public class Shop extends JFrame implements ActionListener, KeyListener{
 
     private JLabel title;
 
-    private JButton speedUpgrade;
-    private JButton bulletSpeed;
-    private JButton maxHP;
-    private JButton life;
+    protected static JButton speedUpgrade;
+    protected static JButton bulletSpeed;
+    protected static JButton maxHP;
+    protected static JButton life;
 
-    private static int speedCost = 100;
-    private static int bulletCost = 100;
-    private static int HPCost = 100;
-    private static int lifeCost = 50;
+    protected static int speedCost = 100;
+    protected static int bulletCost = 100;
+    protected static int HPCost = 100;
+    protected static int lifeCost = 50;
 
     Game game;
     Player player;
@@ -95,37 +95,53 @@ public class Shop extends JFrame implements ActionListener, KeyListener{
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        if(e.getSource()==speedUpgrade&&player.getScore()>=speedCost) {
-            player.setSpeedBuff(player.getSpeedBuff()+1);
-            player.setScore(player.getScore()-speedCost);
-            speedCost+=(speedCost/4);
-            speedUpgrade.setText("Upgrade Tank Speed \n Cost: "+speedCost);
-        }
-
-        else if(e.getSource()==bulletSpeed&&player.getScore()>=bulletCost) {
-            player.setBulletBuff(player.getBulletBuff() + 10);
-            player.setScore(player.getScore()-bulletCost);
-            bulletCost+=(bulletCost/4);
-            bulletSpeed.setText("Upgrade Bullet Speed  \n Cost: "+bulletCost);
-        }
-
-        else if(e.getSource()==maxHP&&player.getScore()>=HPCost) {
-            player.setMaxLives(player.getMaxLives() + 1);
-            player.setScore(player.getScore()-HPCost);
-            HPCost+=(HPCost/4);
-            maxHP.setText("Upgrade Max HP \n Cost: "+HPCost);
-            life.setText("Buy Another Life \n Cost: " + lifeCost);
-        }
-
-        else if(e.getSource()==life&&player.getScore()>=lifeCost) {
-            if(player.getLives()<player.getMaxLives()){
-                player.setLives(player.getLives() + 1);
-                player.setScore(player.getScore() - lifeCost);
-                lifeCost += (lifeCost / 4);
-                life.setText("Buy Another Life \n Cost: " + lifeCost);
+        if(e.getSource()==speedUpgrade) {
+            if(player.getScore()>=speedCost) {
+                player.setSpeedBuff(player.getSpeedBuff() + 1);
+                player.setScore(player.getScore() - speedCost);
+                speedCost += (speedCost / 4);
+                speedUpgrade.setText("Upgrade Tank Speed \n Cost: " + speedCost);
+            }else{
+                speedUpgrade.setText("Not Enough Money!");
             }
-            else{
-                life.setText("Max Lives Reached!");
+        }
+
+        else if(e.getSource()==bulletSpeed) {
+            if(player.getScore()>=bulletCost) {
+                player.setBulletBuff(player.getBulletBuff() + 10);
+                player.setScore(player.getScore() - bulletCost);
+                bulletCost += (bulletCost / 4);
+                bulletSpeed.setText("Upgrade Bullet Speed  \n Cost: " + bulletCost);
+            }else{
+                bulletSpeed.setText("Not Enough Money!");
+            }
+        }
+
+        else if(e.getSource()==maxHP) {
+            if(player.getScore()>=HPCost) {
+                player.setMaxLives(player.getMaxLives() + 1);
+                player.setScore(player.getScore() - HPCost);
+                HPCost += (HPCost / 4);
+                maxHP.setText("Upgrade Max HP \n Cost: " + HPCost);
+                life.setText("Buy Another Life \n Cost: " + lifeCost);
+            }else{
+                maxHP.setText("Not Enough Money!");
+            }
+        }
+
+        else if(e.getSource()==life) {
+            if(player.getScore()>=lifeCost){
+                if(player.getLives()<player.getMaxLives()){
+                    player.setLives(player.getLives() + 1);
+                    player.setScore(player.getScore() - lifeCost);
+                    lifeCost += (lifeCost / 4);
+                    life.setText("Buy Another Life \n Cost: " + lifeCost);
+                }
+                else {
+                    life.setText("Max Lives Reached!");
+                }
+            }else{
+                life.setText("Not Enough Money!");
             }
         }
         points.setText("Coins: "+player.getScore());
