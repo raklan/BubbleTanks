@@ -154,6 +154,15 @@ Tank extends Sprite implements KeyListener {
         setDirection();
     }
 
+    public void resetKeys(){
+        dx=0;
+        dy=0;
+        up=false;
+        down=false;
+        left=false;
+        right=false;
+    }
+
     @Override
     public void mouseReleased(MouseEvent e) {
         double angle = turret.getAngle();
