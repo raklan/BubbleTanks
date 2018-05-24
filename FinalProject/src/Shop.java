@@ -1,3 +1,5 @@
+import oracle.jrockit.jfr.JFR;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -16,10 +18,14 @@ public class Shop extends JFrame implements ActionListener, KeyListener{
     protected static JButton maxHP;
     protected static JButton life;
 
+    JButton close;
+
     protected static int speedCost = 100;
     protected static int bulletCost = 100;
     protected static int HPCost = 100;
     protected static int lifeCost = 50;
+
+    Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 
     Game game;
     Player player;
@@ -31,28 +37,28 @@ public class Shop extends JFrame implements ActionListener, KeyListener{
 
     public Shop(Game frame){
         super();
+        setExtendedState(JFrame.MAXIMIZED_BOTH);
         setUndecorated(true);
         getContentPane().setBackground(new Color(160, 157, 164, 139));
         setBackground(new Color(160, 157, 164, 139));
         game = frame;
         player = game.getPlayer();
-        setBounds(frame.getX(),frame.getY(),frame.getWidth(),frame.getHeight());
         setVisible(false);
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setLayout(null);
 
-        buttonSpace = (getWidth()-buttonWidth*2)/3;
+        buttonSpace = ((int)screenSize.getWidth()-buttonWidth*2)/3;
 
         title = new JLabel("SHOP");
         title.setVisible(true);
-        title.setBounds(0,0,frame.getWidth(), 100);
+        title.setBounds(0,0,(int)screenSize.getWidth(), 100);
         title.setFont(new Font("Times New Roman", ITALIC, 100));
         title.setHorizontalAlignment(SwingConstants.CENTER);
         title.setBackground(new Color(252, 246, 20, 225));
         title.setOpaque(true);
 
         points = new JLabel("Coins: " + player.getScore());
-        points.setBounds(getWidth()/2-50, getHeight()/2-50, 100, 50);
+        points.setBounds((int)screenSize.getWidth()/2-50, (int)screenSize.getHeight()/2-50, 100, 50);
         points.setVisible(true);
         points.setFont(new Font("Times New Roman", ITALIC, 20));
         points.setHorizontalAlignment(SwingConstants.CENTER);
@@ -78,6 +84,12 @@ public class Shop extends JFrame implements ActionListener, KeyListener{
         life.setBounds(buttonWidth+buttonSpace*2,600,buttonWidth,100);
         life.setVisible(true);
         life.addActionListener(this);
+
+        close = new JButton("QUIT");
+        close.addActionListener(this);
+        close.setBounds((int)screenSize.getWidth()-100, (int)screenSize.getHeight()-50,100,50);
+        close.setVisible(true);
+        add(close,0);
 
         add(speedUpgrade);
         add(bulletSpeed);
@@ -108,6 +120,11 @@ public class Shop extends JFrame implements ActionListener, KeyListener{
 
     @Override
     public void actionPerformed(ActionEvent e) {
+        if(e.getSource()==close){
+            Game.t.cancel();
+            game.dispose();
+            this.dispose();
+        }
         if(e.getSource()==speedUpgrade) {
             if(player.getScore()>=speedCost) {
                 player.setSpeedBuff(player.getSpeedBuff() + 1);
@@ -121,7 +138,7 @@ public class Shop extends JFrame implements ActionListener, KeyListener{
 
         else if(e.getSource()==bulletSpeed) {
             if(player.getScore()>=bulletCost) {
-                player.setBulletBuff(player.getBulletBuff() + 10);
+                player.setBulletBuff(player.getBulletBuff() + 2);
                 player.setScore(player.getScore() - bulletCost);
                 bulletCost += (bulletCost / 4);
                 bulletSpeed.setText("Upgrade Bullet Speed  \n Cost: " + bulletCost);
@@ -149,6 +166,7 @@ public class Shop extends JFrame implements ActionListener, KeyListener{
                     player.setScore(player.getScore() - lifeCost);
                     lifeCost += (lifeCost / 4);
                     life.setText("Buy Another Life \n Cost: " + lifeCost);
+                    game.lives.setText("Lives: "+String.valueOf(player.getLives()));
                 }
                 else {
                     life.setText("Max Lives Reached!");
