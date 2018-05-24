@@ -17,6 +17,8 @@ public class Player{
     public void reset(){
         currentScore = 0;
         lives = maxLives;
+        bulletBuff=0;
+        speedBuff=0;
     }
 
     //Returns the High Score

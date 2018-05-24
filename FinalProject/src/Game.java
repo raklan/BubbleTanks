@@ -67,9 +67,10 @@ public class Game extends JFrame {
         add(wave, 0);
 
         waveNum = 0;
-        setup();
 
         shop = new Shop(this);
+
+        setup();
 
         addMouseMotionListener(tank.getTurret());
         addMouseListener(tank);
@@ -79,6 +80,7 @@ public class Game extends JFrame {
 
     public void setup(){
         thePlayer.reset();
+        shop.reset();
         tank.setLocation(getWidth()/2-50, getHeight()/2-50);
         points.setText("Money: "+String.valueOf(thePlayer.getScore()));
         lives.setText("Lives: "+String.valueOf(thePlayer.getLives()));
@@ -123,8 +125,9 @@ public class Game extends JFrame {
 
     public void gameOver(){
         t.cancel();
+        tank.resetKeys();
         int pane = JOptionPane.showConfirmDialog(null, "Game Over!\nWould you like to try again?", "Game Over", JOptionPane.YES_NO_OPTION);//0=yes, 1=no
-        if(pane==0){
+        if(pane==0){//if yes
             for(Bullet b: allBullets)
                 remove(b);
             for(Enemy e: enemies)

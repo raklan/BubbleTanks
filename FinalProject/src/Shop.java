@@ -93,6 +93,19 @@ public class Shop extends JFrame implements ActionListener, KeyListener{
         points.setText("Coins: "+p);
     }
 
+    public void reset(){
+        speedCost = 100;
+        bulletCost = 100;
+        HPCost = 100;
+        lifeCost = 50;
+        speedUpgrade.setText("Upgrade Tank Speed \n Cost: "+speedCost);
+        bulletSpeed.setText("Upgrade Bullet Speed  \n Cost: "+bulletCost);
+        maxHP.setText("Upgrade Max HP \n Cost: "+HPCost);
+        life.setText("Buy Another Life \n Cost: " + lifeCost);
+        points.setText("Coins: "+player.getScore());
+        game.updatePoints(player.getScore());
+    }
+
     @Override
     public void actionPerformed(ActionEvent e) {
         if(e.getSource()==speedUpgrade) {
