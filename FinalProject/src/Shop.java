@@ -154,6 +154,7 @@ public class Shop extends JFrame implements ActionListener, KeyListener{
                 HPCost += (HPCost / 4);
                 maxHP.setText("Upgrade Max HP \n Cost: " + HPCost);
                 life.setText("Buy Another Life \n Cost: " + lifeCost);
+                game.lives.setText("Lives: "+String.valueOf(player.getLives()) + " / " + player.getMaxLives());
             }else{
                 maxHP.setText("Not Enough Money!");
             }
@@ -166,7 +167,7 @@ public class Shop extends JFrame implements ActionListener, KeyListener{
                     player.setScore(player.getScore() - lifeCost);
                     lifeCost += (lifeCost / 4);
                     life.setText("Buy Another Life \n Cost: " + lifeCost);
-                    game.lives.setText("Lives: "+String.valueOf(player.getLives()));
+                    game.lives.setText("Lives: "+String.valueOf(player.getLives()) + " / " + player.getMaxLives());
                 }
                 else {
                     life.setText("Max Lives Reached!");

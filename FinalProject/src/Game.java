@@ -52,17 +52,17 @@ public class Game extends JFrame{
         add(tank, 0);
 
         points = new JLabel("");
-        points.setBounds(0,0,200,50);
+        points.setBounds(10,50,200,50);
         points.setVisible(true);
         add(points, 0);
 
         lives = new JLabel("");
-        lives.setBounds(0,50,300,50);
+        lives.setBounds(10,100,300,50);
         lives.setVisible(true);
         add(lives, 0);
 
         wave = new JLabel("");
-        wave.setBounds(0,100,200,50);
+        wave.setBounds(10,150,200,50);
         wave.setVisible(true);
         add(wave, 0);
 
