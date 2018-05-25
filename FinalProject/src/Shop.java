@@ -104,7 +104,6 @@ public class Shop extends JFrame implements ActionListener, KeyListener{
     public void updateScore(long p){
         points.setText("Coins: "+p);
     }
-
     public void reset(){
         speedCost = 100;
         bulletCost = 100;
@@ -121,9 +120,12 @@ public class Shop extends JFrame implements ActionListener, KeyListener{
     @Override
     public void actionPerformed(ActionEvent e) {
         if(e.getSource()==close){
-            Game.t.cancel();
-            game.dispose();
-            this.dispose();
+            int pane = JOptionPane.showConfirmDialog(null, "Are You Sure You want to Quit?", "QUIT?", JOptionPane.YES_NO_OPTION);//0=yes, 1=no
+            if(pane==0){//if yes
+                Game.t.cancel();
+                game.dispose();
+                this.dispose();
+            }
         }
         if(e.getSource()==speedUpgrade) {
             if(player.getScore()>=speedCost) {
