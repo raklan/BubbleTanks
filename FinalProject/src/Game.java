@@ -141,6 +141,7 @@ public class Game extends JFrame{
             allBullets.clear();
             enemies.clear();
             allCoins.clear();
+            waveNum = 0;
             setup();
         }
     }
