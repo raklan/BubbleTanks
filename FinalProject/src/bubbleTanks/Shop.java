@@ -1,4 +1,4 @@
-import oracle.jrockit.jfr.JFR;
+package bubbleTanks;
 
 import javax.swing.*;
 import java.awt.*;

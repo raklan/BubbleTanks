@@ -1,3 +1,5 @@
+package bubbleTanks;
+
 import java.awt.*;
 
 public abstract class Sprite extends EzImage {

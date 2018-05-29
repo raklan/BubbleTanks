@@ -1,3 +1,5 @@
+package bubbleTanks;
+
 import javax.swing.*;
 import java.awt.*;
 

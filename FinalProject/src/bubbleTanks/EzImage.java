@@ -1,4 +1,4 @@
-//import java.awt.Toolkit.*;
+package bubbleTanks;//import java.awt.Toolkit.*;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;

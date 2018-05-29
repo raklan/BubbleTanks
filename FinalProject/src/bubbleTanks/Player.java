@@ -1,3 +1,5 @@
+package bubbleTanks;
+
 public class Player{
 
     private int topScore;
@@ -27,7 +29,7 @@ public class Player{
         return topScore;
     }
 
-    //Returns the Player's Current Score
+    //Returns the bubbleTanks.Player's Current Score
     public long getScore() {
         return currentScore;
     }
@@ -43,12 +45,12 @@ public class Player{
             topScore = newScore;
     }
 
-    //Sets the Player's current score
+    //Sets the bubbleTanks.Player's current score
     public void setScore(long score) {
         currentScore = score;
     }
 
-    //Sets the Player's Lives
+    //Sets the bubbleTanks.Player's Lives
     public void setLives(int lives) {
         this.lives = lives;
     }

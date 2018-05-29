@@ -1,3 +1,5 @@
+package bubbleTanks;
+
 public class Bullet extends Sprite {
 
     int speed = 10;

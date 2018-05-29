@@ -1,8 +1,7 @@
+package bubbleTanks;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.*;
 import java.util.Timer;
 
@@ -130,7 +129,7 @@ public class Game extends JFrame{
     public void gameOver(){
         t.cancel();
         tank.resetKeys();
-        int pane = JOptionPane.showConfirmDialog(null, "Game Over!\nWould you like to try again?", "Game Over", JOptionPane.YES_NO_OPTION);//0=yes, 1=no
+        int pane = JOptionPane.showConfirmDialog(null, "bubbleTanks.Game Over!\nWould you like to try again?", "bubbleTanks.Game Over", JOptionPane.YES_NO_OPTION);//0=yes, 1=no
         if(pane==0){//if yes
             for(Bullet b: allBullets)
                 remove(b);

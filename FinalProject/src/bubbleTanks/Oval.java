@@ -1,7 +1,9 @@
+package bubbleTanks;
+
 import javax.swing.*;
 import java.awt.*;
 
-/** resources.Oval Supplier Class
+/** resources.bubbleTanks.Oval Supplier Class
  * Author: David D. Riley
  * Date: April, 2004
  */

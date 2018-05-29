@@ -1,7 +1,9 @@
+package bubbleTanks;
+
 import javax.swing.*;
 import java.awt.*;
 
-/** resources.GRectangle Supplier Class
+/** resources.bubbleTanks.GRectangle Supplier Class
  * Author: David D. Riley
  * Date: April, 2004
  */
@@ -17,7 +19,7 @@ public class GRectangle extends JComponent  {
         setBackground(Color.black);
 	}
 
-    /** post:   this method draws a filled resources.GRectangle
+    /** post:   this method draws a filled resources.bubbleTanks.GRectangle
      *          and  the upper left corner is (getX(), getY()) 
      *          and  the rectangle's dimensions are getWidth() and getHeight()
      *          and  the rectangle's color is getBackground()
